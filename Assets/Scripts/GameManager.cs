@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 	public static GameManager instance;
+	public bool is_Push = false;
     
 	void Awake()
     {
@@ -22,7 +23,10 @@ public class GameManager : MonoBehaviour
 
 	void Update()
     {
-        
+        if (is_Push)
+		{
+			is_Push = false;
+		}
 		
 	}
 

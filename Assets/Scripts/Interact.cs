@@ -1,3 +1,4 @@
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,8 @@ public class Interact : MonoBehaviour
     public InteractInputAction interactionAction;
     private InputAction fire;
     public Animator animator;
-    private bool is_Push;
+    private GameManager gameManager;
+    
 
     void Awake()
     {
@@ -26,23 +28,25 @@ public class Interact : MonoBehaviour
         fire.Disable();
     }
 
-    void Update() 
+    void Start() 
     {
-        
+        fire = InputSystem.actions.FindAction("Fire");
+
     }
 
-    public void Click(InputAction.CallbackContext context)
+    void Update()
     {
-        if(context.started)
+        if (fire.IsPressed())
         {
             animator.SetBool("IsPush", true);
             Debug.Log("Click");
         }
-        else if (context.performed)
+        else if (fire.WasReleasedThisFrame())
         {
             animator.SetBool("IsPush", false);
-            Debug.Log("Nigga");
-        }
-
+            Debug.Log("UnClick");
+        }   
     }
+
+
 }
